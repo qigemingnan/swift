@@ -877,7 +877,7 @@ StringTests.test("growth") {
     s += "x"
     s2 = s
   }
-  expectLE(s.nativeCapacity, 34)
+  expectLE(s.nativeCapacity, 40)
 }
 
 StringTests.test("Construction") {
@@ -919,13 +919,13 @@ StringTests.test(
 #endif
 }
 
-#if os(Linux)
+#if os(Linux) || os(Android)
 import Glibc
 #endif
 
 StringTests.test("lowercased()") {
   // Use setlocale so tolower() is correct on ASCII.
-  setlocale(LC_ALL, "C")
+  setlocale(Int32(LC_ALL), "C")
 
   // Check the ASCII domain.
   let asciiDomain: [Int32] = Array(0..<128)
@@ -959,7 +959,7 @@ StringTests.test("lowercased()") {
 
 StringTests.test("uppercased()") {
   // Use setlocale so toupper() is correct on ASCII.
-  setlocale(LC_ALL, "C")
+  setlocale(Int32(LC_ALL), "C")
 
   // Check the ASCII domain.
   let asciiDomain: [Int32] = Array(0..<128)
